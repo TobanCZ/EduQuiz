@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT;
 
 app.get('/api/data', (req, res) => {
   res.json({ message: 'Hello from the server!' });

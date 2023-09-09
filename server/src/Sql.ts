@@ -1,15 +1,15 @@
+import mysql from "mysql2"
+require("dotenv").config()
+
 export class SqlProcedureRunner
 {
     procedureName:string;
     parametres:string[];
-    mysql;
-    dotenv
+
     constructor(ProcedureName:string)
     {
         this.procedureName = ProcedureName;
         this.parametres = [];
-        this.mysql = require('mysql2');
-        this.dotenv = require('dotenv')
     }
 
     AddParametr(parametre:string)
@@ -19,8 +19,12 @@ export class SqlProcedureRunner
 
     ExecuteReader()
     {
-        const connection = this.mysql.createConnection(process.env.DATABASE_URL)
-        console.log('Connected to PlanetScale!')
-        connection.end()
+        let conn =  process.env.DATABASE_URL;
+        if(conn == undefined)
+            return;
+        
+        const connection = mysql.createConnection(conn);
+        console.log('Connected to PlanetScale!');
+        connection.end();
     }
 }

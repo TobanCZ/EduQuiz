@@ -1,4 +1,5 @@
 import { SqlProcedureRunner } from "./Sql";
 
 let sql = new SqlProcedureRunner("awd");
-sql.ExecuteReader();
+let idk = sql.ExecuteReader();
+console.log("awd")

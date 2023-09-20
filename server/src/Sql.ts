@@ -1,4 +1,4 @@
-import mysql from "mysql2"
+import mysql, { OkPacket, RowDataPacket } from "mysql2"
 require("dotenv").config()
 
 export class SqlProcedureRunner
@@ -24,7 +24,16 @@ export class SqlProcedureRunner
             return;
         
         const connection = mysql.createConnection(conn);
-        console.log('Connected to PlanetScale!');
-        connection.end();
+
+        connection.promise().query("SELECT * from Users")
+        .then( ([rows,fields]) => 
+        {
+            console.log(rows);
+        })
+        .catch(console.log)
+        .then( () => 
+        {
+            connection.end();
+        });
     }
 }
